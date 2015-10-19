@@ -1,6 +1,6 @@
 val demoAkkaCluster = project
   .in(file("."))
-  .enablePlugins(AutomateHeaderPlugin, GitVersioning)
+  .enablePlugins(AutomateHeaderPlugin, GitVersioning, JavaAppPackaging, DockerPlugin)
 
 organization := "de.heikoseeberger"
 name         := "demo-akka-cluster"
@@ -35,3 +35,9 @@ preferences := preferences.value
   .setPreference(DoubleIndentClassDeclaration, true)
 
 headers := Map("scala" -> de.heikoseeberger.sbtheader.license.Apache2_0("2015", "Heiko Seeberger"))
+
+maintainer in Docker := "Heiko Seeberger"
+version in Docker    := "latest"
+dockerExposedPorts   := List(2552)
+daemonUser in Docker := "root"
+dockerRepository     := Some("hseeberger")
