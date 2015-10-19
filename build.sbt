@@ -19,8 +19,8 @@ unmanagedSourceDirectories.in(Compile) := List(scalaSource.in(Compile).value)
 unmanagedSourceDirectories.in(Test)    := List(scalaSource.in(Test).value)
 
 libraryDependencies ++= List(
-  "org.scalacheck" %% "scalacheck" % "1.12.5" % "test",
-  "org.scalatest"  %% "scalatest"  % "2.2.5"  % "test"
+  "com.typesafe.akka" %% "akka-cluster"           % "2.4.0",
+  "com.typesafe.akka" %% "akka-http-experimental" % "1.0"
 )
 
 initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
