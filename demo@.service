@@ -1,0 +1,20 @@
+[Unit]
+Description=Demo Akka Cluster
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker rm -f demo-%i
+ExecStart=/usr/bin/docker run \
+  --name demo-%i \
+  -p 2552:2552 \
+  -p 8000:8000 \
+  hseeberger/demo-akka-cluster \
+  -Dakka.remote.netty.tcp.hostname=${COREOS_PUBLIC_IPV4} \
+  -Dcluster.etcd.host=${COREOS_PUBLIC_IPV4}
+ExecStop=/usr/bin/docker stop demo-%i
+
+[X-Fleet]
+Conflicts=demo@*.service
