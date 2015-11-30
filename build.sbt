@@ -19,14 +19,14 @@ unmanagedSourceDirectories.in(Compile) := List(scalaSource.in(Compile).value)
 unmanagedSourceDirectories.in(Test)    := List(scalaSource.in(Test).value)
 
 libraryDependencies ++= List(
-  "com.typesafe.akka" %% "akka-cluster"           % "2.4.0",
-  "com.typesafe.akka" %% "akka-http-experimental" % "1.0",
-  "de.heikoseeberger" %% "constructr"             % "0.2.0"
+  "com.typesafe.akka" %% "akka-cluster"           % "2.4.1",
+  "com.typesafe.akka" %% "akka-http-experimental" % "2.0-M1",
+  "de.heikoseeberger" %% "constructr"             % "0.4.0"
 )
 
 initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
 
-git.baseVersion := "0.1.0"
+git.baseVersion := "0.2.0"
 
 import scalariform.formatter.preferences._
 preferences := preferences.value
