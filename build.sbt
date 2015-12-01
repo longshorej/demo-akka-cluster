@@ -19,9 +19,11 @@ unmanagedSourceDirectories.in(Compile) := List(scalaSource.in(Compile).value)
 unmanagedSourceDirectories.in(Test)    := List(scalaSource.in(Test).value)
 
 libraryDependencies ++= List(
-  "com.typesafe.akka" %% "akka-cluster"           % "2.4.1",
-  "com.typesafe.akka" %% "akka-http-experimental" % "2.0-M1",
-  "de.heikoseeberger" %% "constructr"             % "0.4.0"
+  "com.typesafe.akka"        %% "akka-cluster"           % "2.4.1",
+  "com.typesafe.akka"        %% "akka-http-experimental" % "2.0-M1",
+  "de.heikoseeberger"        %% "akka-log4j"             % "1.0.2",
+  "de.heikoseeberger"        %% "constructr-akka"        % "0.4.0",
+  "org.apache.logging.log4j" % "log4j-core"              % "2.4.1"
 )
 
 initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
@@ -38,6 +40,7 @@ headers := Map("scala" -> de.heikoseeberger.sbtheader.license.Apache2_0("2015", 
 
 maintainer in Docker := "Heiko Seeberger"
 version in Docker    := "latest"
-dockerExposedPorts   := List(2552, 8000)
 daemonUser in Docker := "root"
+dockerBaseImage      := "java:8"
 dockerRepository     := Some("hseeberger")
+dockerExposedPorts   := List(2552, 8000)

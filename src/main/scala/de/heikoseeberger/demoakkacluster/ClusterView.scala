@@ -16,7 +16,7 @@
 
 package de.heikoseeberger.demoakkacluster
 
-import akka.actor.{ Props, Address, Actor }
+import akka.actor.{ ActorLogging, Props, Address, Actor }
 import akka.cluster.{ Cluster, ClusterEvent }
 
 object ClusterView {
@@ -28,16 +28,28 @@ object ClusterView {
   def props: Props = Props(new ClusterView)
 }
 
-class ClusterView extends Actor {
+class ClusterView extends Actor with ActorLogging {
+  import ClusterEvent._
   import ClusterView._
 
   private var members = Set.empty[Address]
 
-  Cluster(context.system).subscribe(self, ClusterEvent.InitialStateAsEvents, classOf[ClusterEvent.MemberEvent])
+  Cluster(context.system).subscribe(self, InitialStateAsEvents, classOf[MemberEvent])
 
   override def receive = {
-    case GetMemberNodes                        => sender() ! members
-    case ClusterEvent.MemberUp(member)         => members += member.address
-    case ClusterEvent.MemberRemoved(member, _) => members -= member.address
+    case GetMemberNodes =>
+      sender() ! members
+
+    case MemberJoined(member) =>
+      log.info(s"Member joined: ${member.address}")
+      members += member.address
+
+    case MemberUp(member) =>
+      log.info(s"Member up: ${member.address}")
+      members += member.address
+
+    case MemberRemoved(member, _) =>
+      log.info(s"Member removed: ${member.address}")
+      members -= member.address
   }
 }

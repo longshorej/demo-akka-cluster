@@ -49,7 +49,7 @@ object DemoApp {
     Await.ready(system.whenTerminated, Duration.Inf)
   }
 
-  def route(clusterView: ActorRef, clusterViewTimeout: Timeout)(implicit ec: ExecutionContext) = {
+  private def route(clusterView: ActorRef, clusterViewTimeout: Timeout)(implicit ec: ExecutionContext) = {
     import Directives._
     path("member-nodes") {
       get {

@@ -1,6 +1,11 @@
 # demo-akka-cluster #
 
-Welcome to demo-akka-cluster!
+Simple demo for Akka Cluster.
+
+## Usage ##
+
+- Start etcd, e.g. via `docker run -d -p 2379:2379 --name etcd quay.io/coreos/etcd:v2.2.1 -advertise-client-urls http://192.168.99.100:2379 -listen-client-urls http://0.0.0.0:2379`
+- Pass the JVM argument for the etcd host to the application, e.g. `-Dconstructr.akka.coordination.host=192.168.99.100`
 
 ## Contribution policy ##
 
