@@ -20,9 +20,9 @@ unmanagedSourceDirectories.in(Test)    := List(scalaSource.in(Test).value)
 
 libraryDependencies ++= List(
   "com.typesafe.akka"        %% "akka-cluster"           % "2.4.1",
-  "com.typesafe.akka"        %% "akka-http-experimental" % "2.0-M1",
+  "com.typesafe.akka"        %% "akka-http-experimental" % "2.0-M2",
   "de.heikoseeberger"        %% "akka-log4j"             % "1.0.2",
-  "de.heikoseeberger"        %% "constructr-akka"        % "0.4.0",
+  "de.heikoseeberger"        %% "constructr-akka"        % "0.5.1",
   "org.apache.logging.log4j" % "log4j-core"              % "2.4.1"
 )
 
