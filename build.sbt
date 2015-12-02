@@ -28,7 +28,7 @@ libraryDependencies ++= List(
 
 initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
 
-git.baseVersion := "0.3.0"
+git.baseVersion := "0.4.0"
 
 import scalariform.formatter.preferences._
 preferences := preferences.value
