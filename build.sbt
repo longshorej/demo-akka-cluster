@@ -22,13 +22,13 @@ libraryDependencies ++= List(
   "com.typesafe.akka"        %% "akka-cluster"           % "2.4.1",
   "com.typesafe.akka"        %% "akka-http-experimental" % "2.0-M2",
   "de.heikoseeberger"        %% "akka-log4j"             % "1.0.2",
-  "de.heikoseeberger"        %% "constructr-akka"        % "0.6.0",
+  "de.heikoseeberger"        %% "constructr-akka"        % "0.7.0",
   "org.apache.logging.log4j" %  "log4j-core"             % "2.4.1"
 )
 
 initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
 
-git.baseVersion := "0.4.0"
+git.useGitDescribe := true
 
 import scalariform.formatter.preferences._
 preferences := preferences.value

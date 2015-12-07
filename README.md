@@ -2,13 +2,21 @@
 
 Simple demo for Akka Cluster.
 
-## Usage ##
+## Usage with Seed Nodes ##
 
-- Start etcd: `docker run -d -p 2379:2379 --name etcd quay.io/coreos/etcd:v2.2.2 -advertise-client-urls http://192.168.99.100:2379 -listen-client-urls http://0.0.0.0:2379`
 - Pass the JVM arguments for the etcd host and others to the application:
-  - `reStart --- -Dconstructr.akka.coordination.host=192.168.99.100 -Dakka.remote.netty.tcp.port=2551 -Ddemo.http.port=8001 -Dlog-file=demo-akka-cluster-1.log`
-  - `reStart --- -Dconstructr.akka.coordination.host=192.168.99.100 -Dakka.remote.netty.tcp.port=2552 -Ddemo.http.port=8002 -Dlog-file=demo-akka-cluster-2.log`
-  - `reStart --- -Dconstructr.akka.coordination.host=192.168.99.100 -Dakka.remote.netty.tcp.port=2553 -Ddemo.http.port=8003 -Dlog-file=demo-akka-cluster-3.log`
+  - `reStart --- -Dakka.remote.netty.tcp.hostname=127.0.0.1 -Dakka.remote.netty.tcp.port=2551 -Ddemo.http.port=8001 -Dlog-file=demo-akka-cluster-1.log -Dakka.cluster.seed-nodes.0=akka.tcp://demo-system@127.0.0.1:2551`
+  - `reStart --- -Dakka.remote.netty.tcp.hostname=127.0.0.1 -Dakka.remote.netty.tcp.port=2552 -Ddemo.http.port=8002 -Dlog-file=demo-akka-cluster-2.log -Dakka.cluster.seed-nodes.0=akka.tcp://demo-system@127.0.0.1:2551`
+  - `reStart --- -Dakka.remote.netty.tcp.hostname=127.0.0.1 -Dakka.remote.netty.tcp.port=2553 -Ddemo.http.port=8003 -Dlog-file=demo-akka-cluster-3.log -Dakka.cluster.seed-nodes.0=akka.tcp://demo-system@127.0.0.1:2551`
+- Get the member nodes: `curl 127.0.0.1:8001/member-nodes`
+
+## Usage with ConductR ##
+
+- Start etcd: `docker run -d -p 2379:2379 --name etcd quay.io/coreos/etcd:v2.2.2 -advertise-client-urls http://192.168.99.100:2379 -listen-client-urls http://0.0.0.0:2379 -debug`
+- Pass the JVM arguments for the etcd host and others to the application:
+  - `reStart --- -Dakka.remote.netty.tcp.hostname=127.0.0.1 -Dakka.remote.netty.tcp.port=2551 -Ddemo.http.port=8001 -Dlog-file=demo-akka-cluster-1.log -Dconstructr.akka.coordination.host=192.168.99.100`
+  - `reStart --- -Dakka.remote.netty.tcp.hostname=127.0.0.1 -Dakka.remote.netty.tcp.port=2552 -Ddemo.http.port=8002 -Dlog-file=demo-akka-cluster-2.log -Dconstructr.akka.coordination.host=192.168.99.100`
+  - `reStart --- -Dakka.remote.netty.tcp.hostname=127.0.0.1 -Dakka.remote.netty.tcp.port=2553 -Ddemo.http.port=8003 -Dlog-file=demo-akka-cluster-3.log -Dconstructr.akka.coordination.host=192.168.99.100`
 - Get the member nodes: `curl 127.0.0.1:8001/member-nodes`
 - Peek inside ConstructR: `curl 192.168.99.100:2379/v2/keys/constructr/akka/demo-system/nodes`
 
