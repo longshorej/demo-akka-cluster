@@ -41,15 +41,15 @@ class ClusterView extends Actor with ActorLogging {
       sender() ! members
 
     case MemberJoined(member) =>
-      log.info(s"Member joined: ${member.address}")
+      log.info("Member joined: {}", member.address)
       members += member.address
 
     case MemberUp(member) =>
-      log.info(s"Member up: ${member.address}")
+      log.info("Member up: {}", member.address)
       members += member.address
 
     case MemberRemoved(member, _) =>
-      log.info(s"Member removed: ${member.address}")
+      log.info("Member removed: {}", member.address)
       members -= member.address
   }
 }

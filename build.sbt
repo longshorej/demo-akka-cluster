@@ -39,7 +39,6 @@ preferences := preferences.value
 headers := Map("scala" -> de.heikoseeberger.sbtheader.license.Apache2_0("2015", "Heiko Seeberger"))
 
 maintainer in Docker := "Heiko Seeberger"
-version in Docker    := "latest"
 daemonUser in Docker := "root"
 dockerBaseImage      := "java:8"
 dockerRepository     := Some("hseeberger")
