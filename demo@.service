@@ -11,7 +11,7 @@ ExecStart=/usr/bin/docker run \
   --name demo-%i \
   -p 2552:2552 \
   -p 8000:8000 \
-  hseeberger/demo-akka-cluster:0.4.0 \
+  hseeberger/demo-akka-cluster:0.4.1 \
   -Dakka.remote.netty.tcp.hostname=${COREOS_PUBLIC_IPV4} \
   -Dconstructr.akka.coordination.host=${COREOS_PUBLIC_IPV4}
 ExecStop=/usr/bin/docker stop demo-%i
