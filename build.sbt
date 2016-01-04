@@ -20,10 +20,10 @@ unmanagedSourceDirectories.in(Test)    := List(scalaSource.in(Test).value)
 
 libraryDependencies ++= List(
   "com.typesafe.akka"        %% "akka-cluster"           % "2.4.1",
-  "com.typesafe.akka"        %% "akka-http-experimental" % "2.0-M2",
-  "de.heikoseeberger"        %% "akka-log4j"             % "1.0.2",
-  "de.heikoseeberger"        %% "constructr-akka"        % "0.7.1",
-  "org.apache.logging.log4j" %  "log4j-core"             % "2.4.1"
+  "com.typesafe.akka"        %% "akka-http-experimental" % "2.0.1",
+  "de.heikoseeberger"        %% "akka-log4j"             % "1.0.3",
+  "de.heikoseeberger"        %% "constructr-akka"        % "0.8.0",
+  "org.apache.logging.log4j" %  "log4j-core"             % "2.5"
 )
 
 initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
@@ -31,7 +31,7 @@ initialCommands := """|import de.heikoseeberger.demoakkacluster._""".stripMargin
 git.useGitDescribe := true
 
 import scalariform.formatter.preferences._
-preferences := preferences.value
+scalariformPreferences := scalariformPreferences.value
   .setPreference(AlignSingleLineCaseStatements, true)
   .setPreference(AlignSingleLineCaseStatements.MaxArrowIndent, 100)
   .setPreference(DoubleIndentClassDeclaration, true)
