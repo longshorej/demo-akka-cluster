@@ -18,11 +18,12 @@ scalacOptions ++= List(
 unmanagedSourceDirectories.in(Compile) := List(scalaSource.in(Compile).value)
 unmanagedSourceDirectories.in(Test)    := List(scalaSource.in(Test).value)
 
+val akkaVersion       = "2.4.2"
 libraryDependencies ++= List(
-  "com.typesafe.akka"        %% "akka-cluster"           % "2.4.1",
-  "com.typesafe.akka"        %% "akka-http-experimental" % "2.0.1",
-  "de.heikoseeberger"        %% "akka-log4j"             % "1.0.3",
-  "de.heikoseeberger"        %% "constructr-akka"        % "0.8.0",
+  "com.typesafe.akka"        %% "akka-cluster"           % akkaVersion,
+  "com.typesafe.akka"        %% "akka-http-experimental" % akkaVersion,
+  "de.heikoseeberger"        %% "akka-log4j"             % "1.1.2",
+  "de.heikoseeberger"        %% "constructr-akka"        % "0.10.0",
   "org.apache.logging.log4j" %  "log4j-core"             % "2.5"
 )
 
