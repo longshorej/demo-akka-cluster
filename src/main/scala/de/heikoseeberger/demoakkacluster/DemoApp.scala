@@ -34,28 +34,30 @@ object DemoApp {
     implicit val mat = ActorMaterializer()
 
     val config = system.settings.config.getConfig("demo")
-    val httpInterface = config.getString("http.interface")
+    val httpAddress = config.getString("http.address")
     val httpPort = config.getInt("http.port")
     val clusterViewTimeout = Timeout(Duration(config.getDuration("cluster-view-timeout").toMillis, MILLISECONDS))
 
     val clusterView = system.actorOf(ClusterView.props, ClusterView.Name)
     Http()
-      .bindAndHandle(route(clusterView, clusterViewTimeout), httpInterface, httpPort)
+      .bindAndHandle(route(clusterView, clusterViewTimeout), httpAddress, httpPort)
       .onComplete {
-        case Success(_) => system.log.info(s"Listening on $httpInterface:$httpPort")
-        case Failure(t) => system.log.error(t, s"Could not bind to $httpInterface:$httpPort")
+        case Success(_) => system.log.info(s"Listening on $httpAddress:$httpPort")
+        case Failure(t) => system.log.error(t, s"Could not bind to $httpAddress:$httpPort")
       }
 
     Await.ready(system.whenTerminated, Duration.Inf)
   }
 
-  private def route(clusterView: ActorRef, clusterViewTimeout: Timeout)(implicit ec: ExecutionContext) = {
+  private def route(clusterView: ActorRef, clusterViewTimeout: Timeout) = {
     import Directives._
     path("member-nodes") {
       get {
         implicit val timeout = clusterViewTimeout
-        onSuccess((clusterView ? ClusterView.GetMemberNodes).mapTo[Set[Address]]) {
-          case addresses => complete(addresses.mkString(" "))
+        onSuccess((clusterView ? ClusterView.GetMemberNodes).mapTo[Set[Address]]) { addresses =>
+          complete {
+            addresses.mkString(" ")
+          }
         }
       }
     }
